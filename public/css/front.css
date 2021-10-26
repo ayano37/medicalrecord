@@ -1,0 +1,26 @@
+@charset "UTF-8";
+
+body {
+  color: #000;
+}
+
+.navbar-brand .logo {
+  width: 120px;
+  height: 82px;
+  color: #000080;
+}
+
+.container .row-height {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.container .post {
+  font-family: "Arial", "\30E1\30A4\30EA\30AA";
+}
+
+.container .post .date {
+  font-size: em;
+  color: #999999;
+}
+

@@ -1,0 +1,24 @@
+body {
+  color: #000;
+}
+
+.navbar-brand {
+  .logo {
+      width: 120px;
+      height: 82px;
+      color: #000080;
+  }
+}
+.container {
+    .row-height {
+        display: flex;
+        flex-wrap: wrap;
+        } 
+    .post {
+        font-family: "Arial", "メイリオ";
+        .date {
+            font-size: em;
+            color: #999999;
+        }
+    }
+}
