@@ -44,21 +44,24 @@
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <!-- Left Side Of Navbar -->
                         <ul class="navbar-nav mr-auto">
+
                         </ul>
 
                         <!-- Right Side Of Navbar -->
                         <ul class="navbar-nav ml-auto">
-                            <a class="btn btn-secondary" href="{{ action('Admin\UserController@create') }}">ユーザー登録</a>
                         </ul>
                     </div>
                 </div>
             </nav>
             {{-- ここまでナビゲーションバー --}}
-
-            <main class="py-4">
-                {{-- コンテンツをここに入れるため、@yieldで空けておく --}}
+            <main>
+                @section('sidebar')
+                //ここがメインのサイドバー
+                @show
+                <div class="container">
                 @yield('content')
+                </div>
             </main>
-        </div>
+        </div>    
     </body>
 </html>

@@ -16,7 +16,6 @@ class CreateTeamsTable extends Migration
         Schema::create('teams', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('team_name')->nullable(); //チーム名を保存するカラム
-            $table->string('player_name')->nullable(); //選手名を保存するカラム
             $table->string('image_path')->nullable(); //チームロゴを保存するカラム（画像のパスは空でも保存可）
             $table->string('game_day')->nullable(); //試合日程を保存するカラム
             $table->timestamps();

@@ -18,12 +18,6 @@
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label class="col-md-2" for="player_name">選手一覧</label>
-                        <div class="col-md-10">
-                            <textarea class="form-control" name="player_name" rows="20">{{ old('player_name') }}</textarea> 
-                        </div>
-                    </div>
-                    <div class="form-group row">
                         <label class="col-md-2" for="game_day">試合日程</label>
                         <div class="col-md-10">
                             <textarea class="form-control" name="game_day" rows="20">{{ old('game_day') }}</textarea>
