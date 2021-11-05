@@ -56,7 +56,7 @@
             {{-- ここまでナビゲーションバー --}}
             <main>
                 @section('sidebar')
-                //ここがメインのサイドバー
+                {{-- ここがメインのサイドバー --}}
                 @show
                 <div class="container">
                 @yield('content')

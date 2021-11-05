@@ -42,6 +42,7 @@ class User extends Authenticatable
             //'team_id' => 'required',
             'name' => 'required',
             'birthday' => 'required',
+            
             );
     
     public function team()

@@ -24,13 +24,13 @@ class UserController extends Controller
   {   
       $this->validate($request, User::$rules);
       $user = new User();
-      $temperature = new Temperature();
-      $weight = new Weight();
-      $menstrual_period = new MenstrualPeriod();
-      $injury = new Injury();
+      // $temperature = new Temperature();
+      // $weight = new Weight();
+      // $menstrual_period = new MenstrualPeriod();
+      // $injury = new Injury();
       $form = $request->all();
       
-      $team_id = $user->team_id;
+      // $team_id = $user->team_id;
       
       //$user = User::find($request->team_id);
       //if (empty($user)) {
@@ -51,25 +51,25 @@ class UserController extends Controller
       $user->fill($form);
       $user->save();
       
-      $temperature->user_id=$user->id;
-      $temperature->temperature=$request->temperature;
-      $temperature->save();
+      //$temperature->user_id=$user->id;
+      //$temperature->temperature=$request->temperature;
+      // $temperature->save();
       
-      $weight->user_id=$user->id;
-      $weight->weight=$request->weight;
-      $weight->save();
+      // $weight->user_id=$user->id;
+      // $weight->weight=$request->weight;
+      // $weight->save();
       
-      $menstrual_period->user_id=$user->id;
-      $menstrual_period_s->menstrual_period_s=$request->menstrual_period_s;
-      $menstrual_period_f->menstrual_period_f=$request->menstrual_period_f;
-      $menstrual_period_s->save();
-      $menstrual_period_f->save();
+      // $menstrual_period->user_id=$user->id;
+      // $menstrual_period_s->menstrual_period_s=$request->menstrual_period_s;
+      // $menstrual_period_f->menstrual_period_f=$request->menstrual_period_f;
+      // $menstrual_period_s->save();
+      // $menstrual_period_f->save();
       
-      $injury->user_id=$user->id;
-      $injury->injury=$request->injury;
-      $injury->save();
+      // $injury->user_id=$user->id;
+      // $injury->injury=$request->injury;
+      // $injury->save();
 
-      return redirect('admin/user/create', compact('team_id'));
+      return redirect('/team');
   }
   
   public function edit(Request $request)
