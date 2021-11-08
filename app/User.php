@@ -48,5 +48,26 @@ class User extends Authenticatable
     public function team()
     {
         return $this->belongsTo('App\Team');
-    }        
+    }
+    
+    public function temperatures()
+    {
+        return $this->hasMany('App\Temperature');
+    }
+    
+    public function weights()
+    {
+        return $this->hasMany('App\Weight');
+    }
+    
+    public function MenstrualPeriods()
+    {
+        return $this->hasMany('App\MenstrualPeriod');
+    }
+    
+    public function Injuries()
+    {
+        return $this->hasMany('App\Injury');
+    }
+
 }

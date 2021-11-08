@@ -1,4 +1,6 @@
-@extends('layouts.front')
+@extends('layouts.admin')
+
+@section('title', 'チームページ')
 
 @section('content')
     <div class="container">
@@ -25,7 +27,7 @@
                         <h4><選手名></h4>
                         <div>
                             @foreach($users as $user)
-                            <a href="{{ action('UserController@show',['team_id' => $team->id]) }}">{!! nl2br($user->name) !!}</a>
+                            <a href="{{ action('UserController@show',['id' => $user->id]) }}">{!! nl2br($user->name) !!}</a>
                             @endforeach
                         </div> 
                     </div>

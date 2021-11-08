@@ -13,21 +13,30 @@ use App\Injury;
 
 class UserController extends Controller
 {
-   public function add(Request $request)
-  {
+  public function add(Request $request)
+  {   
+      //dd($request->id);
       $teams = Team::all();
+      $user = User::find($request->id);
+      //dd($user);
+      $temperature = Temperature::find($request->id);
+      $weight = Weight::find($request->id);
+      $menstrual_period_s = MenstrualPeriod::find($request->id);
+      $menstrual_period_f = MenstrualPeriod::find($request->id);
+      $injury = Injury::find($request->id);
     
-      return view('admin.user.create',compact('teams'));
+      return view('admin.user.create',['user'=>$user,'temperature'=>$temperature,'weight'=>$weight,'menstrual_period_s'=>$menstrual_period_s,'menstrual_period_f'=>$menstrual_period_f,'injury'=>$injury]);
   }
   
   public function create(Request $request)
   {   
-      $this->validate($request, User::$rules);
+      
+      //$this->validate($request, User::$rules);
       $user = new User();
-      // $temperature = new Temperature();
-      // $weight = new Weight();
-      // $menstrual_period = new MenstrualPeriod();
-      // $injury = new Injury();
+      $temperature = new Temperature();
+      $weight = new Weight();
+      $menstrual_period = new MenstrualPeriod();
+      $injury = new Injury();
       $form = $request->all();
       
       // $team_id = $user->team_id;
@@ -36,40 +45,33 @@ class UserController extends Controller
       //if (empty($user)) {
         //abort(404);    
       //}
-      
-      // formに画像があれば、保存する
-      if (isset($form['image'])) {
-        $path = $request->file('image')->store('public/image');
-        $user->avatar_image = basename($path);
-      } else {
-          $user->avatar_image = null;
-      }
 
       unset($form['_token']);
       unset($form['image']);
       // データベースに保存する
-      $user->fill($form);
-      $user->save();
       
-      //$temperature->user_id=$user->id;
-      //$temperature->temperature=$request->temperature;
-      // $temperature->save();
+      $temperature->user_id=$user->id;
       
-      // $weight->user_id=$user->id;
-      // $weight->weight=$request->weight;
-      // $weight->save();
+      $temperature->temperature=$request->temperature;
       
-      // $menstrual_period->user_id=$user->id;
-      // $menstrual_period_s->menstrual_period_s=$request->menstrual_period_s;
-      // $menstrual_period_f->menstrual_period_f=$request->menstrual_period_f;
-      // $menstrual_period_s->save();
-      // $menstrual_period_f->save();
+      $temperature->save();
       
-      // $injury->user_id=$user->id;
-      // $injury->injury=$request->injury;
-      // $injury->save();
+      
+      $weight->user_id=$user->id;
+      $weight->weight=$request->weight;
+      $weight->save();
+      
+      $menstrual_period->user_id=$user->id;
+      $menstrual_period_s->menstrual_period_s=$request->menstrual_period_s;
+      $menstrual_period_f->menstrual_period_f=$request->menstrual_period_f;
+      $menstrual_period_s->save();
+      $menstrual_period_f->save();
+      
+      $injury->user_id=$user->id;
+      $injury->injury=$request->injury;
+      $injury->save();
 
-      return redirect('/team');
+      return redirect('/user');
   }
   
   public function edit(Request $request)

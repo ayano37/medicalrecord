@@ -24,8 +24,8 @@ Route::group(['prefix'=>'admin'],function(){
 });
 
 Route::group(['prefix' => 'admin'], function() {
-    //Route::get('user/create', 'Admin\UserController@add');
-    //Route::post('user/create', 'Admin\UserController@create');
+    Route::get('user/create', 'Admin\UserController@add');
+    Route::post('user/create', 'Admin\UserController@create');
 });
 
 Route::get('/register', 'Auth\RegisterController@showRegisterForm');
@@ -37,5 +37,6 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/team', 'TeamController@index');
-Route::get('/user', 'UserController@index');
-Route::get('/user', 'UserController@show');
+Route::get('/user/{id}', 'UserController@show');
+//Route::get('/user', 'UserController@index');
+
