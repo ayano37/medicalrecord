@@ -36,7 +36,7 @@ Route::post('/login', 'Auth\loginController@login');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
-Route::get('/team', 'TeamController@index');
+Route::get('/team', 'TeamController@show');
 Route::get('/user/{id}', 'UserController@show');
 //Route::get('/user', 'UserController@index');
 

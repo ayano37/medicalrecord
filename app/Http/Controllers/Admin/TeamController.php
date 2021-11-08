@@ -39,7 +39,7 @@ class TeamController extends Controller
       $user->team_id = $team->id;
       $user->save();
       
-      return redirect('/');
+      return redirect('/team');
   }
   
     public function edit(Request $request)
@@ -80,7 +80,7 @@ class TeamController extends Controller
       $user->team_id = $team->id;
       $user->save();
 
-      return redirect('/');
+      return redirect('/team');
   }
   
   public function delete(Request $request)
@@ -89,6 +89,6 @@ class TeamController extends Controller
       $team = Team::find($request->id);
       // 削除する
       $team->delete();
-      return redirect('/');
+      return redirect('/team');
   }
 }

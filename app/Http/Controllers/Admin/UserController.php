@@ -18,7 +18,6 @@ class UserController extends Controller
       //dd($request->id);
       $teams = Team::all();
       $user = User::find($request->id);
-      //dd($user);
       $temperature = Temperature::find($request->id);
       $weight = Weight::find($request->id);
       $menstrual_period_s = MenstrualPeriod::find($request->id);

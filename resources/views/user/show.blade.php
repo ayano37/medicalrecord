@@ -7,12 +7,12 @@
         <hr color="#c0c0c0">
             <div class="row">
                 <div id="contents" class="col-sm-8">
-                    <ul>
-                        <a class="btn btn-secondary" href="{{ action('Admin\UserController@add',["id"=>$user->id]) }}">本日の登録</a>
-                    </ul>
                     <h1>My Page</h1>
                     <div class="date d-flex align-items-center">
                         <h4>{{ $date->format('Y年m月d日') }}</h4>
+                        <ul>
+                            <a class="btn btn-secondary" href="{{ action('Admin\UserController@add',["id"=>$user->id]) }}">本日の登録</a>
+                        </ul>
                     </div>
                         <div class="temperature d-flex align-items-center">
                             <h4>体温：{{ $temperature->temperature }}</h4>
