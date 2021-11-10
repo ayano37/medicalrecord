@@ -15,7 +15,7 @@
                         </ul>
                     </div>
                         <div class="temperature d-flex align-items-center">
-                            <h4>体温：{{ $temperature->temperature }}</h4>
+                            <h4>体温：{{ $temperature->temperature }}{ number_format($temperature, 1) }}</h4>
                         </div>
                     @if(!is_null($weight))
                         <div class="weight d-flex">

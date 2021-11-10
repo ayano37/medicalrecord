@@ -22,14 +22,14 @@ class UserController extends Controller
         // if($user->temperatures!=null) {
         // $temperature = $user->temperatures[0];
         // }else {
-        $temperature=new Temperature();
-        $temperature->temperature=35.0;
             //$temperature=35.0;
         //}
         // $weight = Weight::find($user->id);
         // $menstrual_period_s = MenstrualPeriod::find($user->id);
         // $menstrual_period_f = MenstrualPeriod::find($user->id);
         // $injury = Injury::find($user->id);
+        $temperature=new Temperature();
+        $temperature->temperature=35.0;
         $weight = null;
         $menstrual_period_s = null;
         $menstrual_period_f = null;

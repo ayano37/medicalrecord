@@ -30,47 +30,58 @@ class UserController extends Controller
   public function create(Request $request)
   {   
       
-      //$this->validate($request, User::$rules);
-      $user = new User();
+      $user = User::find($request->id);
+      
       $temperature = new Temperature();
       $weight = new Weight();
       $menstrual_period = new MenstrualPeriod();
       $injury = new Injury();
       $form = $request->all();
       
-      // $team_id = $user->team_id;
-      
-      //$user = User::find($request->team_id);
-      //if (empty($user)) {
-        //abort(404);    
-      //}
-
-      unset($form['_token']);
-      unset($form['image']);
       // データベースに保存する
       
       $temperature->user_id=$user->id;
-      
       $temperature->temperature=$request->temperature;
-      
       $temperature->save();
-      
       
       $weight->user_id=$user->id;
       $weight->weight=$request->weight;
       $weight->save();
       
       $menstrual_period->user_id=$user->id;
-      $menstrual_period_s->menstrual_period_s=$request->menstrual_period_s;
-      $menstrual_period_f->menstrual_period_f=$request->menstrual_period_f;
-      $menstrual_period_s->save();
-      $menstrual_period_f->save();
+      // $menstrual_period->menstrual_period_s=$request->date(menstrual_period_s);
+      // $menstrual_period_s=$request->date(menstrual_period_s);
+      // $menstrual_period->menstrual_period_s=basename($menstrual_period_s);
+      // $menstrual_period->menstrual_period_f=$request->date(menstrual_period_f);
+      // $menstrual_period_f=$request->date(menstrual_period_f);
+      // $menstrual_period->menstrual_period_f=basename($menstrual_period_f);
+     
+     
+      $menstrual_period->menstrual_period_s=$request->menstrual_period_s;
+      // $menstrual_period_s=$request->menstrual_period_s;
+      $menstrual_period->menstrual_period_f=$request->menstrual_period_f;
+      // $menstrual_period_f=$request->menstrual_period_f;
+      // //dd($menstrual_period_f);
+      // // $menstrual_period_s = MenstrualPeriod::get(['menstrual_period_s']);
+      // // //dd($menstrual_period_s);
+      // // $menstrual_period_f = MenstrualPeriod::get(['menstrual_period_f']);
+      // // $menstrual_period_s->menstrual_period_s=$request->menstrual_period_s;
+      // // $menstrual_period_f->menstrual_period_f=$request->menstrual_period_f;
+      // //$menstrual_period->save();
+      //$menstrual_period->fill();
+      $menstrual_period->save();
+      // $menstrual_period_s->save();
+      // $menstrual_period_f->save();
       
       $injury->user_id=$user->id;
       $injury->injury=$request->injury;
       $injury->save();
-
-      return redirect('/user');
+      
+      unset($form['_token']);
+  
+      // $id = $user->id;
+      // return redirect('/user/{id}');
+      return redirect()->route('user', [$user]);
   }
   
   public function edit(Request $request)
