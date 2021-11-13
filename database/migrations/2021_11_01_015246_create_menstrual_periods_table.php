@@ -18,6 +18,7 @@ class CreateMenstrualPeriodsTable extends Migration
             $table->integer('user_id');
             $table->date('menstrual_period_s')->nullable();
             $table->date('menstrual_period_f')->nullable();
+            $table->date('target_date');
             $table->timestamps();
         });
     }

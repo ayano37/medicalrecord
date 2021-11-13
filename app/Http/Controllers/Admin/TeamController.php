@@ -28,7 +28,10 @@ class TeamController extends Controller
       }
       
       $user = new User();
-      $user->name= $form['name'];
+      //$user->name= $form['name'];
+      if ( !isset($form['name']) || $form['name'] == "" ){
+      $message = '名前を入力してください';
+      } 
       
       //unset($form['name']);
       unset($form['_token']);

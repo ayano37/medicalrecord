@@ -10,10 +10,10 @@ class MenstrualPeriod extends Model
     
     protected $fillable = [
 
-        'user_id','menstrual_period_s','menstrual_period_f'
+        'user_id','menstrual_period_s','menstrual_period_f','target_date'
     ];
     
-    public function User()
+    public function user()
     {
         return $this->belongsTo('App\User');
     }

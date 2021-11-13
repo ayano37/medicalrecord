@@ -9,7 +9,7 @@
     <div class ="container">
         <div class="form-group row">
             <div class ="col-md-8 mx-auto">
-                <h2>選手情報の更新</h2>
+                <h2>選手情報の登録</h2>
                 <form action ="{{ action('Admin\UserController@create',["id"=>$user->id]) }}" method ="post" enctype ="multipart/form-data">
                     @if (count($errors) > 0)
                         <ul>
@@ -18,6 +18,12 @@
                             @endforeach
                         </ul>
                     @endif
+                    <div class="form-group row">
+                        <label class="col-md-2">日付</label>
+                        <div class="col-md-3">
+                            <input type="date" name="target_date">
+                        </div>
+                    </div>
                     <div class="form-group row">
                         <label class="col-md-2"  for="temperature">体温</label>
                         <div class="col-md-3">

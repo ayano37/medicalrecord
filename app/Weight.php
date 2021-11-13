@@ -10,10 +10,10 @@ class Weight extends Model
     
     protected $fillable = [
 
-        'user_id','weight'
+        'user_id','weight','target_date'
     ];
     
-    public function User()
+    public function user()
     {
         return $this->belongsTo('App\User');
     }

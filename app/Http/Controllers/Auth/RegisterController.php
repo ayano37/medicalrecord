@@ -63,12 +63,15 @@ class RegisterController extends Controller
      * @return \App\User
      */
     protected function create(array $data)
-    {
+    {   
+        //$user = new User();
+        //dd(request());
         if (isset($data['image'])) {
-        $path = $data->file('image')->store('public/image');
-        $user->avatar_image = basename($path);
+        $path = request()->file( 'image')->store('public/image');    
+        //$path = $data['image']->store('public/image');
+        $avatar_image = basename($path);
       } else {
-          $user->avatar_image = null;
+          $avatar_image = null;
       }
         
         return User::create([
@@ -76,7 +79,7 @@ class RegisterController extends Controller
             'birthday' => $data['birthday'],
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
-            'avatar_image' => $data['avatar_image']
+            'avatar_image' => $avatar_image
         ]);
     }
     

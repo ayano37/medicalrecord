@@ -10,16 +10,25 @@
                     <h1>My Page</h1>
                     <div class="date d-flex align-items-center">
                         <h4>{{ $date->format('Y年m月d日') }}</h4>
-                        <ul>
-                            <a class="btn btn-secondary" href="{{ action('Admin\UserController@add',["id"=>$user->id]) }}">本日の登録</a>
-                        </ul>
                     </div>
+                    <form action ="{{ action('UserController@show',["id"=>$user->id]) }}" method ="get">
+                        <div class="form-group row">
+                            <div class="col-md-3">
+                                <input type="date" name="target_date">
+                            </div>
+                            <div class="col-md-2">
+                                <input class="btn btn-secondary" type="submit" value="日付変更">
+                            </div>
+                        </div> 
+                    </form>
+                    @if(!is_null($temperature))
                         <div class="temperature d-flex align-items-center">
-                            <h4>体温：{{ $temperature->temperature }}{ number_format($temperature, 1) }}</h4>
+                            <h4>体温：{{ $temperature->temperature }}℃</h4>
                         </div>
+                    @endif    
                     @if(!is_null($weight))
                         <div class="weight d-flex">
-                            <h4>体重：{{ $weight->weight }}</h4>
+                            <h4>体重：{{ $weight->weight }}kg</h4>
                         </div>
                     @endif
                     @if(!is_null($menstrual_period_s))
@@ -37,6 +46,14 @@
                             <h4>ケガ情報：{{ str_limit($injury->injury,500) }}</h4>
                         </div>
                     @endif
+                    <div class="row">
+                        <div class="col-md-3">
+                            <a class="btn btn-secondary" href="{{ action('Admin\UserController@add',["id"=>$user->id]) }}">本日の登録</a>
+                        </div>
+                        <div class="col-md-2">
+                            <a class="btn btn-secondary" href="{{ action('Admin\UserController@edit', ['id' => $user->id]) }}">編集</a>    
+                        </div>
+                    </div>
                 </div>
                 <div id="sidebar" class="col-sm-4">
                     <div class="image">
@@ -45,32 +62,10 @@
                         @endif
                     </div>
                     <div class="name mx-auto">
-                        <h3>{{ $user->name }}</h3>
+                        <h3>名前：{{ $user->name }}</h3>
                     </div>
                     <div class="birthday mx-auto">
-                        <h3>{{ $user->birthday }}</h3>
-                    </div>
-                </div>
-            </div>
-        <hr color="#c0c0c0">
-            <div class="row">
-                <div class="list-date col-md-12 mx-auto">
-                    <div class="row">
-                        <table class="table table-dark">
-                            <thead>
-                                <tr>
-                                    <th width="20%">{{ $date->year }}年</th>
-                                    <th width="20%">{{ $date->month }}月</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                @foreach((array)$dates as $date)
-                                    <th>{{ $date }}</th>
-                                @endforeach
-                                </tr>
-                            <tbody>
-                        </table>        
+                        <h3>生年月日：{{ $user->birthday }}</h3>
                     </div>
                 </div>
             </div>

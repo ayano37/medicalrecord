@@ -17,6 +17,7 @@ class CreateInjuriesTable extends Migration
             $table->bigIncrements('id');
             $table->integer('user_id');
             $table->string('injury')->nullable();
+            $table->date('target_date');
             $table->timestamps();
         });
     }

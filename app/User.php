@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Carbon\Carbon;
 
 class User extends Authenticatable
 {
@@ -16,7 +17,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'team_id', 'name', 'email', 'password', 'birthday', 'avatar_image', 'admin_flag'
+        'team_id', 'name', 'email', 'password', 'birthday', 'avatar_image', 'admin_flag','target_date'
     ];
 
     /**
@@ -54,6 +55,11 @@ class User extends Authenticatable
     {
         return $this->hasMany('App\Temperature');
     }
+    
+    // public function temperatureToday()
+    // {
+    //     return $this->temperatures->whereDate('created_at', Carbon::today());
+    // }
     
     public function weights()
     {

@@ -8,7 +8,7 @@
                 <div class="card-header">{{ __('messages.Register') }}</div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('register') }}">
+                    <form method="POST" action="{{ route('register') }}" enctype="multipart/form-data">
                         @csrf
 
                         <div class="form-group row">
@@ -80,7 +80,7 @@
                         <div class="form-group row">
                             <label for ="avatar_image" class="col-md-4 col-form-label text-md-right">画像</label>
                             <div class="col-md-6">
-                                <input type="file" class="form-control-file" name="avatar_image">
+                                <input type="file" class="form-control-file" name="image">
                             </div>
                         </div>
 

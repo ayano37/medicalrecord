@@ -10,10 +10,10 @@ class Temperature extends Model
     
     protected $fillable = [
 
-        'user_id','temperature'
+        'user_id','temperature','target_date'
     ];
     
-    public function User()
+    public function user()
     {
         return $this->belongsTo('App\User');
     }

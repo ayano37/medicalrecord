@@ -17,6 +17,7 @@ class CreateWeightsTable extends Migration
             $table->bigIncrements('id');
             $table->integer('user_id');
             $table->double('weight',4,1)->nullable();
+            $table->date('target_date');
             $table->timestamps();
         });
     }

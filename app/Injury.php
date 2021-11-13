@@ -10,10 +10,10 @@ class Injury extends Model
     
     protected $fillable = [
 
-        'user_id','injury'
+        'user_id','injury','target_date'
     ];
     
-    public function User()
+    public function user()
     {
         return $this->belongsTo('App\User');
     }
