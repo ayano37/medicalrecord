@@ -1,0 +1,19 @@
+.bg_test {
+  //width: 100%;
+  height:60vh;
+  background-image: url(../images/img_40e48b86e26189072727598cb3f414273306979.jpeg)!important;
+  //background-color: red;
+  background-position: center center; 
+  background-repeat: no-repeat;
+  background-attachment: fixed; 
+  background-size: cover;
+  text-align:  center;    /* 文字中央寄せ */
+  padding:  150px;        /* 余白指定 */
+  border: solid 2px;      /* 枠線指定 */
+}
+.bg_test-text {
+    border:  solid 1px;                             /* 枠線指定 */
+    display:  inline-block;                         /* インラインブロックにする */
+    padding: 10px 20px;                             /* 余白指定 */
+    background-color: rgba(255, 255, 255, 0.7);     /* 背景色指定 */
+}

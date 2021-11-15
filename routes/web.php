@@ -37,6 +37,7 @@ Route::group(['prefix' => 'admin'], function() {
 
 Auth::routes();
 
+Route::get('/top', 'TeamController@add');
 Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/team', 'TeamController@show');
 Route::get('/user/{id}', 'UserController@show')->name('user')->middleware('auth');

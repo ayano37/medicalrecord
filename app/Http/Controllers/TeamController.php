@@ -8,7 +8,12 @@ use App\Team;
 use App\User;
 
 class TeamController extends Controller
-{
+{   
+    public function add(Request $request)
+    {
+        return view('/top');
+    }
+    
     public function show(Request $request)
     {   
         $teams = Team::all()->sortByDesc('updated_at');

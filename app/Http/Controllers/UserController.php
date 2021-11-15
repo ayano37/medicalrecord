@@ -17,7 +17,7 @@ class UserController extends Controller
     {
         $user = User::find($request->id);
         //$date = new Carbon
-        $date = $request->target_date ? new Carbon($request->target_date) : Carbon::today();
+        $target_date = $request->target_date ? ($request->target_date) : date('Y-m-d');
         $today = Carbon::today();
         //dd($request->all(), $date);
         
@@ -33,16 +33,16 @@ class UserController extends Controller
         // $temperature = $user->temperatureToday();
         // dd($temperature);
         
-        $temperature = Temperature::whereDate('target_date', $date)->where('user_id', $user->id)->first();
-        $weight = Weight::whereDate('target_date', $date)->where('user_id', $user->id)->first();
+        $temperature = Temperature::whereDate('target_date', $target_date)->where('user_id', $user->id)->first();
+        $weight = Weight::whereDate('target_date', $target_date)->where('user_id', $user->id)->first();
         $menstrual_period_s = \App\MenstrualPeriod::select('menstrual_period_s','updated_at');
-        $menstrual_period_s = MenstrualPeriod::whereDate('target_date', $date)->where('user_id', $user->id)->first();
+        $menstrual_period_s = MenstrualPeriod::whereDate('target_date', $target_date)->where('user_id', $user->id)->first();
         $menstrual_period_f = \App\MenstrualPeriod::select('menstrual_period_f','updated_at');
-        $menstrual_period_f = MenstrualPeriod::whereDate('target_date', $date)->where('user_id', $user->id)->first();
-        $injury = Injury::whereDate('target_date', $date)->where('user_id', $user->id)->first();
+        $menstrual_period_f = MenstrualPeriod::whereDate('target_date', $target_date)->where('user_id', $user->id)->first();
+        $injury = Injury::whereDate('target_date', $target_date)->where('user_id', $user->id)->first();
         
         //return view('user.index', ['user' => User::findOrFail($id), 'date'=>$date,'temperature'=>$temperature]);
-        return view('user.show', ['user' => User::findOrFail($request->id), 'date'=>$today,'temperature'=>$temperature,'weight'=>$weight,'menstrual_period_s'=>$menstrual_period_s,'menstrual_period_f'=>$menstrual_period_f,'injury'=>$injury]);  
+        return view('user.show', ['user' => User::findOrFail($request->id), 'target_date'=>$request->target_date, 'today'=>$today,'temperature'=>$temperature,'weight'=>$weight,'menstrual_period_s'=>$menstrual_period_s,'menstrual_period_f'=>$menstrual_period_f,'injury'=>$injury]);  
     }
     
     // public function index(Request $request)

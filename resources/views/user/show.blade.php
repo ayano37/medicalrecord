@@ -9,12 +9,12 @@
                 <div id="contents" class="col-sm-8">
                     <h1>My Page</h1>
                     <div class="date d-flex align-items-center">
-                        <h4>{{ $date->format('Y年m月d日') }}</h4>
+                        <h4>{{ $today->format('Y年m月d日') }}</h4>
                     </div>
                     <form action ="{{ action('UserController@show',["id"=>$user->id]) }}" method ="get">
                         <div class="form-group row">
                             <div class="col-md-3">
-                                <input type="date" name="target_date">
+                                <input type="date" name="target_date" value="{{ $target_date }}">
                             </div>
                             <div class="col-md-2">
                                 <input class="btn btn-secondary" type="submit" value="日付変更">
@@ -51,7 +51,7 @@
                             <a class="btn btn-secondary" href="{{ action('Admin\UserController@add',["id"=>$user->id]) }}">本日の登録</a>
                         </div>
                         <div class="col-md-2">
-                            <a class="btn btn-secondary" href="{{ action('Admin\UserController@edit', ['id' => $user->id]) }}">編集</a>    
+                            <a class="btn btn-secondary" href="{{ action('Admin\UserController@edit', ['id' => $user->id,'target_date' => $target_date]) }}">編集</a>    
                         </div>
                     </div>
                 </div>

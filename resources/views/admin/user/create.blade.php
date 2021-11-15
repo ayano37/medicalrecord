@@ -28,8 +28,8 @@
                         <label class="col-md-2"  for="temperature">体温</label>
                         <div class="col-md-3">
                             <select name=temperature step=0.1>
-                            @for($number = 35.0; $number <= 40.1; $number=$number+0.1) {
-                                echo "<option value="{{ number_format($number, 1) }}">{{ number_format($number, 1) }}</option>";}
+                            @for($number = 35.0; $number <= 40.1; $number=$number+0.1) 
+                                <option value="{{ number_format($number, 1) }}">{{ number_format($number, 1) }}</option>
                             @endfor
                             </select> 
                             <label>℃</label>

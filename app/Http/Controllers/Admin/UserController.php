@@ -10,6 +10,7 @@ use App\Temperature;
 use App\Weight;
 use App\MenstrualPeriod;
 use App\Injury;
+use Carbon\Carbon;
 
 class UserController extends Controller
 {
@@ -43,13 +44,12 @@ class UserController extends Controller
       $temperature->user_id=$user->id;
       $temperature->temperature=$request->temperature;
       $temperature->target_date=$request->target_date;
-      //dd($temperature);
+      dd($temperature);
       $temperature->save();
       
       $weight->user_id=$user->id;
       $weight->weight=$request->weight;
       $weight->target_date=$request->target_date;
-      //dd($weight);
       $weight->save();
       
       $menstrual_period->user_id=$user->id;
@@ -72,57 +72,72 @@ class UserController extends Controller
   
   public function edit(Request $request)
   {   
-      //dd($request);
-      // User Modelからデータを取得する
+      //dd($request->all());
       $user = User::find($request->id);
-      if (empty($user)) {
-        abort(404);    
-      }
+      $date = isset($request->target_date) ? new Carbon($request->target_date) : Carbon::today();
+      //dd($date);
+      //$target_date = $request->target_date;
+      //$form = $request->all();
+      //dd($form);
+      //$target_date = $request->target_date;
+      //dd($target_date);
       
-      $temperature = Temperature::where('user_id', '=', $user->id)->get();
+      $temperature = Temperature::whereDate('target_date', $date)->where('user_id', $user->id)->first();
+      $weight = Weight::whereDate('target_date', $date)->where('user_id', $user->id)->first();
+      $menstrual_period_s = \App\MenstrualPeriod::select('menstrual_period_s','updated_at');
+      $menstrual_period_s = MenstrualPeriod::whereDate('target_date', $date)->where('user_id', $user->id)->first();
+      $menstrual_period_f = \App\MenstrualPeriod::select('menstrual_period_f','updated_at');
+      $menstrual_period_f = MenstrualPeriod::whereDate('target_date', $date)->where('user_id', $user->id)->first();
+      $injury = Injury::whereDate('target_date', $date)->where('user_id', $user->id)->first();
       
-      $weight = Weight::find($request->id);
-      $menstrual_period_s = MenstrualPeriod::find($request->id);
-      $menstrual_period_f = MenstrualPeriod::find($request->id);
-      $injury = Injury::find($request->id);
-      
-      return view('admin.user.edit', ['user_form' => $user]);
+      return view('admin.user.edit', ['user'=>User::findOrFail($request->id), 'target_date'=>$date->format('Y-m-d'),'temperature'=>$temperature,'weight'=>$weight,'menstrual_period_s'=>$menstrual_period_s,'menstrual_period_f'=>$menstrual_period_f,'injury'=>$injury]);
   }
 
   public function update(Request $request)
-  {
+  {   
+      //dd($request);
       // Validationをかける
       //$this->validate($request, User::$rules);
       // User Modelからデータを取得する
       $user = User::find($request->id);
-      // 送信されてきたフォームデータを格納する
-  
-      $user_form = $request->all();
-      // if ($request->remove == 'true') {
-      //     $user_form['avatar_image'] = null;
-      // } elseif ($request->file('image')) {
-      //     $path = $request->file('image')->store('public/image');
-      //     $user_form['avatar_image'] = basename($path);
-      // } else {
-      //     $user_form['avatar_image'] = $user->avatar_image;
-      // }
+      $date = $request->target_date;
+      //dd($date);
+      $temperature = Temperature::find($request->id);
+      //dd($temperature);
+      $weight = Weight::find($request->id);
+      $menstrual_period_s = MenstrualPeriod::find($request->id);
+      $menstrual_period_f = MenstrualPeriod::find($request->id);
+      $injury = Injury::find($request->id);
+      //dd($injury);
       
-      unset($user_form['_token']);
-      //unset($news_form['image']);
-      unset($user_form['remove']);
+      //dd($date);
+      
+      // 送信されてきたフォームデータを格納する
+      $form = $request->all();
+      //dd($form);
+      //dd($temperature_form);
+      
+      unset($form['_token']);
 
       // 該当するデータを上書きして保存する
-      $user->fill($user_form)->save();
+      $temperature->fill($form)->save();
+      //$temperature->target_date = Carbon::parse($request->target_date)->toDateString();
+      //dd($temperature);
+      //
+      $weight->fill($form)->save();
+      $menstrual_period_s->fill($form)->save();
+      $menstrual_period_f->fill($form)->save();
+      $injury->fill($form)->save();
 
       return redirect()->route('user', [$user]);
   }
   
-  public function delete(Request $request)
-  {
-      // 該当するUser Modelを取得
-      $user = User::find($request->id);
-      // 削除する
-      $user->delete();
-      return redirect('/user');
-  }
+  // public function delete(Request $request)
+  // {
+  //     // 該当するUser Modelを取得
+  //     $user = User::find($request->id);
+  //     // 削除する
+  //     $user->delete();
+  //     return redirect('/user');
+  // }
 }
