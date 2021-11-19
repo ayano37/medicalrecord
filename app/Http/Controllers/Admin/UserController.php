@@ -44,7 +44,7 @@ class UserController extends Controller
       $temperature->user_id=$user->id;
       $temperature->temperature=$request->temperature;
       $temperature->target_date=$request->target_date;
-      dd($temperature);
+      //dd($temperature);
       $temperature->save();
       
       $weight->user_id=$user->id;

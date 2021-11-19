@@ -24,7 +24,7 @@
     <body>
         <div class="bg_test">
             <div class="bg_test-text">
-                背景画像を設定します
+                <a class="btn btn-secondary" href="{{ action('Admin\TeamController@add') }}">新規作成</a>
             </div>
         </div>
     </body>

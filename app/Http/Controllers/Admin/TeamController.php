@@ -10,12 +10,15 @@ use App\User;
 class TeamController extends Controller
 {
     public function add()
-  {
-      return view('admin.team.create');
+  {   
+      //$team = Team::all();
+      
+      return view('admin.team.create');//,['team' => $team]);
   }
   
-    public function create(Request $request)
-  {
+  
+      public function create(Request $request)
+    { 
       $team = new Team();
       $form = $request->all();
 
@@ -27,11 +30,11 @@ class TeamController extends Controller
           $team->image_path = null;
       }
       
-      $user = new User();
-      //$user->name= $form['name'];
-      if ( !isset($form['name']) || $form['name'] == "" ){
-      $message = '名前を入力してください';
-      } 
+      // $user = new User();
+      // //$user->name= $form['name'];
+      // if ( !isset($form['name']) || $form['name'] == "" ){
+      // $message = '名前を入力してください';
+      // } 
       
       //unset($form['name']);
       unset($form['_token']);
@@ -39,10 +42,10 @@ class TeamController extends Controller
       // データベースに保存する
       $team->fill($form);
       $team->save();
-      $user->team_id = $team->id;
-      $user->save();
-      
-      return redirect('/team');
+      // $user->team_id = $team->id;
+      // $user->save();
+      return redirect('/team/index');
+  
   }
   
     public function edit(Request $request)

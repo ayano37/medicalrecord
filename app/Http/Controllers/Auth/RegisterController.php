@@ -73,8 +73,10 @@ class RegisterController extends Controller
       } else {
           $avatar_image = null;
       }
-        
+        dd($data);
         return User::create([
+            
+            'team_id' => $data['team_id'],
             'name' => $data['name'],
             'birthday' => $data['birthday'],
             'email' => $data['email'],
@@ -86,7 +88,8 @@ class RegisterController extends Controller
     public function showRegisterForm($id)
     {
         $user = User::find($id);
-        return view('/register', ['register' => User::findOrFail($id)]);
+        $teams = Team::all();
+        return view('/register', ['register' => User::findOrFail($id)])->with('teams',$teams);
     }
     
     public function add()

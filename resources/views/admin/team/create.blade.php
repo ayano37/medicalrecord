@@ -2,14 +2,14 @@
 @extends('layouts.admin')
 
 {{-- admin.blade.phpの@yield('title')に'ニュースの新規作成'を埋め込む --}}
-@section('title', 'チーム情報の更新')
+@section('title', 'チーム情報の登録')
 
 {{-- admin.blade.phpの@yield('content')に以下のタグを埋め込む --}}
 @section('content')
     <div class ="container">
         <div class ="row">
             <div class ="col-md-8 mx-auto">
-                <h2>チーム情報の更新</h2>
+                <h2>チーム情報の登録</h2>
                 <form action ="{{ action('Admin\TeamController@create') }}" method ="post" enctype ="multipart/form-data">
                     <div class="form-group row">
                         <label class="col-md-2" for="team_name">チーム名</label>
@@ -30,7 +30,7 @@
                         </div>
                     </div>
                     {{ csrf_field() }}
-                    <input type="submit" class="btn btn-primary" value="更新">
+                    <input type="submit" class="btn btn-primary" value="登録">
                 </form>
             </div>
         </div>
