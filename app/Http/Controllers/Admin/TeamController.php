@@ -82,11 +82,11 @@ class TeamController extends Controller
       // 該当するデータを上書きして保存する
       $team->fill($team_form)->save();
       
-      $user = new User();
-      $user->team_id = $team->id;
-      $user->save();
-
-      return redirect('/team');
+      // $user = new User();
+      // $user->team_id = $team->id;
+      // $user->save();
+      
+      return redirect()->route('team', [$team]);
   }
   
   public function delete(Request $request)
@@ -95,6 +95,6 @@ class TeamController extends Controller
       $team = Team::find($request->id);
       // 削除する
       $team->delete();
-      return redirect('/team');
+      return redirect('/team/index');
   }
 }

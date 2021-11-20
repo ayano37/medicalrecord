@@ -5,7 +5,6 @@
 @section('content')
     <div class="container">
         <hr color="#c0c0c0">
-            @foreach($teams as $team)
             <div class="row">
                 <div class="col-md-7 mx-auto d-flex align-items-center">
                     <div class="team_name">
@@ -45,9 +44,6 @@
                             <h6>更新日：{{ $team->updated_at->format('Y年m月d日') }}</h6>
                         </div>
                         <div class="col-md-2">
-                            <a class="btn btn-secondary" href="{{ action('Admin\TeamController@create', ['id' => $team->id]) }}">新規作成</a>
-                        </div>
-                        <div class="col-md-2">
                             <a class="btn btn-secondary" href="{{ action('Admin\TeamController@edit', ['id' => $team->id]) }}">編集</a>
                         </div>
                         <div class="col-md-2">
@@ -56,7 +52,6 @@
                     </div>
                 </div>
             </div>
-        @endforeach
         <hr color="#c0c0c0">
     </div>
 @endsection

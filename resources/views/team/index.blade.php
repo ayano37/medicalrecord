@@ -26,7 +26,9 @@
                             @foreach($teams as $team)
                                 <tr>
                                     <th>{{ $team->id }}</th>
-                                    <td>{{ \Str::limit($team->team_name, 50) }}</td>
+                                    <td>
+                                        <a href="{{ action('TeamController@show',['id' => $team->id]) }}">{!! nl2br($team->team_name) !!}</a>
+                                    </td>    
                                 </tr>
                             @endforeach
                         </tbody>

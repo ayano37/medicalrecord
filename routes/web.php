@@ -10,7 +10,6 @@
 | contains the "web" middleware group. Now create something great!
 |
 */
-
 Route::get('/', function () {
     return view('welcome');
 });
@@ -40,8 +39,8 @@ Auth::routes();
 //Route::get('/top', 'TeamController@add');
 //Route::get('/home', 'HomeController@index')->name('home');
 Route::get('/home', 'TeamController@show')->name('home');
-Route::get('team/index', 'TeamController@index');
-Route::get('/team', 'TeamController@show');
+Route::get('/team/index', 'TeamController@index');
+Route::get('/team/{id}', 'TeamController@show')->name('team');
 Route::get('/user/{id}', 'UserController@show')->name('user')->middleware('auth');
 //Route::get('/user', 'UserController@index');
 

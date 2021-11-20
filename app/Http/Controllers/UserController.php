@@ -14,8 +14,9 @@ use Carbon\Carbon;
 class UserController extends Controller
 {   
     public function show(Request $request)
-    {
+    {   
         $user = User::find($request->id);
+        //dd($user);
         //$date = new Carbon
         $target_date = $request->target_date ? ($request->target_date) : date('Y-m-d');
         $today = Carbon::today();

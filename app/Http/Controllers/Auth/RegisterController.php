@@ -65,7 +65,7 @@ class RegisterController extends Controller
     protected function create(array $data)
     {   
         //$user = new User();
-        //dd(request());
+        dd($data);
         if (isset($data['image'])) {
         $path = request()->file( 'image')->store('public/image');    
         //$path = $data['image']->store('public/image');
@@ -73,7 +73,7 @@ class RegisterController extends Controller
       } else {
           $avatar_image = null;
       }
-        dd($data);
+        
         return User::create([
             
             'team_id' => $data['team_id'],

@@ -6,17 +6,11 @@
         <div class="row">
             <div class="col-md-8 mx-auto">
                 <h2>チーム情報の編集</h2>
-                <form action="{{ action('Admin\TeamController@update') }}" method="post" enctype="multipart/form-data">
+                <form action="{{ action('Admin\TeamController@update',["id"=>$team_form->id]) }}" method="post" enctype="multipart/form-data">
                     <div class="form-group row">
                         <label class="col-md-2" for="team_name">チーム名</label>
                         <div class="col-md-10">
                             <input type="text" class="form-control" name="team_name" value="{{ $team_form->team_name }}">
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label class="col-md-2" for="player_name">選手一覧</label>
-                        <div class="col-md-10">
-                            <textarea class="form-control" name="player_name" rows="20">{{ $team_form->player_name }}</textarea>
                         </div>
                     </div>
                     <div class="form-group row">
