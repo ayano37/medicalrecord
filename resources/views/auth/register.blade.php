@@ -15,7 +15,7 @@
                             <label  for="team_name" class="col-md-4 col-form-label text-md-right">チーム名</label>
                             
                             <div class = "col-md-6">
-                                {{ Form::select('team_name', App\Team::selectlist(), old('team_name'), ['class' => 'form-control', 'id' => 'team_id', 'required' => 'required']) }}
+                                {{ Form::select('team_id', App\Team::selectlist(), old('team_name'), ['class' => 'form-control', 'id' => 'team_id', 'required' => 'required']) }}
                             </div>    
                         </div>  
                         

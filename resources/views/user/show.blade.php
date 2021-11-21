@@ -48,10 +48,13 @@
                     @endif
                     <div class="row">
                         <div class="col-md-3">
-                            <a class="btn btn-secondary" href="{{ action('Admin\UserController@add',["id"=>$user->id]) }}">本日の登録</a>
+                            <a class="btn btn-secondary" href="{{ action('Admin\UserController@add',['id'=>$user->id]) }}">本日の登録</a>
                         </div>
                         <div class="col-md-2">
                             <a class="btn btn-secondary" href="{{ action('Admin\UserController@edit', ['id' => $user->id,'target_date' => $target_date]) }}">編集</a>    
+                        </div>
+                        <div class="col-md-5">
+                            <a class="btn btn-secondary" href="{{ action('TeamController@show', ['id' => $user->team_id]) }}">チームページに戻る</a>    
                         </div>
                     </div>
                 </div>

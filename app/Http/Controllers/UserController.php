@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\HTML;
+use Auth;
 use App\User;
 use App\Temperature;
 use App\Weight;
@@ -43,7 +44,11 @@ class UserController extends Controller
         $injury = Injury::whereDate('target_date', $target_date)->where('user_id', $user->id)->first();
         
         //return view('user.index', ['user' => User::findOrFail($id), 'date'=>$date,'temperature'=>$temperature]);
-        return view('user.show', ['user' => User::findOrFail($request->id), 'target_date'=>$request->target_date, 'today'=>$today,'temperature'=>$temperature,'weight'=>$weight,'menstrual_period_s'=>$menstrual_period_s,'menstrual_period_f'=>$menstrual_period_f,'injury'=>$injury]);  
+        if ($user->id == Auth::id()) {
+        return view('user.show', ['user' => User::findOrFail($request->id), 'target_date'=>$request->target_date, 'today'=>$today,'temperature'=>$temperature,'weight'=>$weight,'menstrual_period_s'=>$menstrual_period_s,'menstrual_period_f'=>$menstrual_period_f,'injury'=>$injury]);
+        } else {
+            return view('errors.403');
+        }
     }
     
     // public function index(Request $request)

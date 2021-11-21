@@ -14,7 +14,7 @@ class Team extends Model
     $list = array();
     $list += array( "" => "選択してください" ); //selectlistの先頭を空に
     foreach ($teams as $team) {
-       $list += array( $team->team_name => $team->team_name );
+       $list += array( $team->id => $team->team_name );
     }
     return $list;
 }

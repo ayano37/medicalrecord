@@ -14,7 +14,7 @@ class TeamController extends Controller
     {   
         $team = Team::find($request->id);
         //$user = User::get();
-        $user = Auth::user();
+        //$user = Auth::user();
         //dd($user);
         //$user = auth()->user();
         //$team_id = $user->team_id;

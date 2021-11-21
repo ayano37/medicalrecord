@@ -26,7 +26,9 @@
                         <h4><選手名></h4>
                         <div>
                             @foreach($users as $user)
-                            <a href="{{ action('UserController@show',['id' => $user->id]) }}">{!! nl2br($user->name) !!}</a>
+                                @if($user->team_id == $team->id)
+                                <a href="{{ action('UserController@show',['id' => $user->id, 'team_id' => $user->team_id]) }}">{!! nl2br($user->name) !!}</a>
+                                @endif
                             @endforeach
                         </div> 
                     </div>

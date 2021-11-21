@@ -44,7 +44,7 @@ class TeamController extends Controller
       $team->save();
       // $user->team_id = $team->id;
       // $user->save();
-      return redirect('/team/index');
+      return redirect('/team');
   
   }
   

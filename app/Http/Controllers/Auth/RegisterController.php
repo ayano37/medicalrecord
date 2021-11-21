@@ -8,6 +8,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Auth;
 
 class RegisterController extends Controller
 {
@@ -30,6 +31,7 @@ class RegisterController extends Controller
      * @var string
      */
     protected $redirectTo = '/team';
+    
 
     /**
      * Create a new controller instance.
@@ -65,9 +67,9 @@ class RegisterController extends Controller
     protected function create(array $data)
     {   
         //$user = new User();
-        dd($data);
-        if (isset($data['image'])) {
-        $path = request()->file( 'image')->store('public/image');    
+        //dd($data);
+        if (isset($data['avatar_image'])) {
+        $path = request()->file('avatar_image')->store('public/image');    
         //$path = $data['image']->store('public/image');
         $avatar_image = basename($path);
       } else {
@@ -83,6 +85,18 @@ class RegisterController extends Controller
             'password' => Hash::make($data['password']),
             'avatar_image' => $avatar_image
         ]);
+    }
+    
+    public function redirectPath()
+    {   
+        if (Auth::check()) {
+            return $this->redirectTo . '/' . Auth::user()->team_id;
+        }
+        if (method_exists($this, 'redirectTo')) {
+            return $this->redirectTo();
+        }
+
+        return property_exists($this, 'redirectTo') ? $this->redirectTo : '/home';
     }
     
     public function showRegisterForm($id)
