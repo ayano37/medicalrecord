@@ -48,4 +48,17 @@ class Handler extends ExceptionHandler
     {
         return parent::render($request, $exception);
     }
+    
+    // public function render($request, Throwable $exception)
+    // {
+    //     // TokenMismatchException 例外発生時
+    //     if($exception instanceof \Illuminate\Session\TokenMismatchException) {
+    //         // ログアウトリクエスト時は、強制的にログアウト
+    //         if($request->is('logout')) {
+    //             Auth::logout();
+    //         }
+    //     }
+ 
+    //     return parent::render($request, $exception);
+    // }
 }

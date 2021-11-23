@@ -26,7 +26,7 @@
                         <h4><選手名></h4>
                         <div>
                             @foreach($users as $user)
-                                @if($user->team_id == $team->id)
+                                @if($user->team_id == $team->id && $user->admin_flag == "1")
                                 <a href="{{ action('UserController@show',['id' => $user->id, 'team_id' => $user->team_id]) }}">{!! nl2br($user->name) !!}</a>
                                 @endif
                             @endforeach
@@ -42,8 +42,15 @@
                 <div class="col-md-12">
                     <hr color="#c0c0c0">
                     <div class="row">
-                        <div class="col-md-5 date d-flex align-items-center">
+                        <div class="col-md-4 date d-flex align-items-center">
                             <h6>更新日：{{ $team->updated_at->format('Y年m月d日') }}</h6>
+                        </div>
+                        <div class="col-md-4 d-flex align-items-center">
+                            @foreach($users as $user)
+                                @if($user->team_id == $team->id && $user->admin_flag == "0")
+                                <h6>管理者：{{ $user->name }}</h6>
+                                @endif
+                            @endforeach
                         </div>
                         <div class="col-md-2">
                             <a class="btn btn-secondary" href="{{ action('Admin\TeamController@edit', ['id' => $team->id]) }}">編集</a>

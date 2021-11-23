@@ -8,11 +8,22 @@
                 <div class="card-header">{{ __('messages.Register') }}</div>
 
                 <div class="card-body">
-                    <form method="POST" action="{{ route('register') }}">
+                    <form method="POST" action="{{ route('register') }}" enctype ="multipart/form-data">
                         @csrf
+                        
+                        <div class="form-group row">
+                            <label for="admin_flag" class="col-md-4 col-form-label text-md-right">登録番号</label>
+                            <div class="col-md-6">
+                                <select class="form-control" name="admin_flag">
+                                    <option value="" selected="selected">選択してください</option>
+                                    <option value="0">管理者</option>
+                                    <option value="1">選手</option>
+                                </select>
+                            </div>
+                        </div>
 
                         <div class="form-group row">
-                            <label  for="team_name" class="col-md-4 col-form-label text-md-right">チーム名</label>
+                            <label for="team_name" class="col-md-4 col-form-label text-md-right">チーム名</label>
                             
                             <div class = "col-md-6">
                                 {{ Form::select('team_id', App\Team::selectlist(), old('team_name'), ['class' => 'form-control', 'id' => 'team_id', 'required' => 'required']) }}
@@ -77,10 +88,23 @@
                             </div>
                         </div>
                         
+                        <!--<div class="form-group row">-->
+                        <!--    <label for ="avatar_image" class="col-md-4 col-form-label text-md-right">画像</label>-->
+                        <!--    <div class="col-md-6">-->
+                        <!--        <input type="file" class="form-control-file" name="image">-->
+                        <!--    </div>-->
+                        <!--</div>-->
+                        
                         <div class="form-group row">
-                            <label for ="avatar_image" class="col-md-4 col-form-label text-md-right">画像</label>
+                            <label for="avatar_image" class="col-md-4 col-form-label text-md-right">{{ __('プロフィール画像 (サイズは1024Kbyteまで）') }}</label>
+ 
                             <div class="col-md-6">
-                                <input type="file" class="form-control-file" name="image">
+                                <input id="avatar_image" type="file" name="image" class="form-control-file">
+                                @error('image')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                             </div>
                         </div>
 

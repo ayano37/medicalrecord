@@ -9,6 +9,8 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Auth;
+use Illuminate\Http\Request;
+use Illuminate\Auth\Events\Registered;
 
 class RegisterController extends Controller
 {
@@ -64,20 +66,23 @@ class RegisterController extends Controller
      * @param  array  $data
      * @return \App\User
      */
-    protected function create(array $data)
+    protected function create(Request $request)
     {   
         //$user = new User();
-        //dd($data);
-        if (isset($data['avatar_image'])) {
-        $path = request()->file('avatar_image')->store('public/image');    
+        $data = $request->all();
+        //dd($request);
+        if (isset($data['image'])) {
+        $path = $request->file('image')->store('public/image');    
         //$path = $data['image']->store('public/image');
         $avatar_image = basename($path);
       } else {
           $avatar_image = null;
       }
+      //dd($avatar_image);
         
         return User::create([
             
+            'admin_flag' => $data['admin_flag'],
             'team_id' => $data['team_id'],
             'name' => $data['name'],
             'birthday' => $data['birthday'],
@@ -103,7 +108,7 @@ class RegisterController extends Controller
     {
         $user = User::find($id);
         $teams = Team::all();
-        return view('/register', ['register' => User::findOrFail($id)])->with('teams',$teams);
+        return view('/register', ['register' => User::findOrFail($id)]);//->with('teams',$teams);
     }
     
     public function add()
@@ -111,6 +116,18 @@ class RegisterController extends Controller
         $teams = Team::all();
         
         return view('auth.register');
+    }
+    
+    public function register(Request $request)
+    {
+        $this->validator($request->all())->validate();
+
+        event(new Registered($user = $this->create($request)));
+
+        $this->guard()->login($user);
+
+        return $this->registered($request, $user)
+                        ?: redirect($this->redirectPath());
     }
     
 }

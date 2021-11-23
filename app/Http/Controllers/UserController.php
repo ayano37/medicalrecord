@@ -17,7 +17,8 @@ class UserController extends Controller
     public function show(Request $request)
     {   
         $user = User::find($request->id);
-        //dd($user);
+        $users = User::all();
+        //dd($users);
         //$date = new Carbon
         $target_date = $request->target_date ? ($request->target_date) : date('Y-m-d');
         $today = Carbon::today();
@@ -44,10 +45,12 @@ class UserController extends Controller
         $injury = Injury::whereDate('target_date', $target_date)->where('user_id', $user->id)->first();
         
         //return view('user.index', ['user' => User::findOrFail($id), 'date'=>$date,'temperature'=>$temperature]);
-        if ($user->id == Auth::id()) {
-        return view('user.show', ['user' => User::findOrFail($request->id), 'target_date'=>$request->target_date, 'today'=>$today,'temperature'=>$temperature,'weight'=>$weight,'menstrual_period_s'=>$menstrual_period_s,'menstrual_period_f'=>$menstrual_period_f,'injury'=>$injury]);
+        foreach($users as $user) {
+        if ($user->id == Auth::id() || $user->admin_flag == "0") {
+            return view('user.show', ['user' => User::findOrFail($request->id), 'target_date'=>$request->target_date, 'today'=>$today,'temperature'=>$temperature,'weight'=>$weight,'menstrual_period_s'=>$menstrual_period_s,'menstrual_period_f'=>$menstrual_period_f,'injury'=>$injury]);
         } else {
             return view('errors.403');
+        }
         }
     }
     

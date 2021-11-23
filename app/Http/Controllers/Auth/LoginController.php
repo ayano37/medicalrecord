@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\AuthenticatesUsers;
+use App\User;
 
 class LoginController extends Controller
 {
@@ -42,4 +43,26 @@ class LoginController extends Controller
         $user = User::find($id);
         return view('/login', ['login' => User::findOrFail($id)]);
     }
+    
+    /**
+     * ログアウトしたときの画面遷移先
+     */
+    protected function loggedOut(\Illuminate\Http\Request $request)
+    {
+        return redirect()->route('login');
+    }
+    
+    // public function redirectPath()
+    // {   
+    //     $user = User::all();
+    //     return view('team.show');
+    // }
+    
+//     protected function redirectTo() {
+//       if(! Auth::user()) {
+//           return '/login';
+//       }
+//       return route('team.show', ['team' => Auth::team_id()]);
+//   }
+    
 }

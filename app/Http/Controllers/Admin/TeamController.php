@@ -51,11 +51,20 @@ class TeamController extends Controller
     public function edit(Request $request)
   {
       // Team Modelからデータを取得する
+      $users = User::all();
       $team = Team::find($request->id);
+      //dd($user);
       if (empty($team)) {
         abort(404);    
       }
-      return view('admin.team.edit', ['team_form' => $team]);
+      
+      foreach($users as $user) {
+      if ($team->id == $user->team_id && $user->admin_flag == "0"){
+        return view('admin.team.edit', ['team_form' => $team]);
+      } else {
+        return view('errors.403');
+      }
+      }
   }
 
 
@@ -91,10 +100,18 @@ class TeamController extends Controller
   
   public function delete(Request $request)
   {
-      // 該当するNews Modelを取得
+      // 該当するModelを取得
+      $users = User::all();
       $team = Team::find($request->id);
       // 削除する
       $team->delete();
-      return redirect('/team/index');
+      
+      foreach($users as $user) {
+      if ($team->id == $user->team_id && $user->admin_flag == "0"){
+      return redirect('/team');
+      } else {
+        return view('errors.403');
+      }
+      }
   }
 }
