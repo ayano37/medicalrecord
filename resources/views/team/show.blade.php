@@ -26,7 +26,7 @@
                         <h4><選手名></h4>
                         <div>
                             @foreach($users as $user)
-                                @if($user->team_id == $team->id && $user->admin_flag == "1")
+                                @if($user->team_id == $team->id && $user->admin_flag == "0")
                                 <a href="{{ action('UserController@show',['id' => $user->id, 'team_id' => $user->team_id]) }}">{!! nl2br($user->name) !!}</a>
                                 @endif
                             @endforeach
@@ -47,7 +47,7 @@
                         </div>
                         <div class="col-md-4 d-flex align-items-center">
                             @foreach($users as $user)
-                                @if($user->team_id == $team->id && $user->admin_flag == "0")
+                                @if($user->team_id == $team->id && $user->admin_flag == "1")
                                 <h6>管理者：{{ $user->name }}</h6>
                                 @endif
                             @endforeach

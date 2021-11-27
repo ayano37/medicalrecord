@@ -42,5 +42,6 @@ Route::get('/home', 'TeamController@show')->name('home');
 Route::get('/team', 'TeamController@index');
 Route::get('/team/{id}', 'TeamController@show')->name('team');
 Route::get('/user/{id}', 'UserController@show')->name('user')->middleware('auth');
-//Route::get('/user', 'UserController@index');
+
+Route::get('/weight/{id}', 'UserController@showWeight');
 

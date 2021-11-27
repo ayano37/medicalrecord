@@ -16,9 +16,14 @@
                             <div class="col-md-6">
                                 <select class="form-control" name="admin_flag">
                                     <option value="" selected="selected">選択してください</option>
-                                    <option value="0">管理者</option>
-                                    <option value="1">選手</option>
+                                    <option value="0">選手</option>
+                                    <option value="1">管理者</option>
                                 </select>
+                                @error('admin_flag')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                             </div>
                         </div>
 
@@ -27,7 +32,12 @@
                             
                             <div class = "col-md-6">
                                 {{ Form::select('team_id', App\Team::selectlist(), old('team_name'), ['class' => 'form-control', 'id' => 'team_id', 'required' => 'required']) }}
-                            </div>    
+                            </div>
+                            @error('team_name')
+                                <span class="invalid-feedback" role="alert">
+                                    <strong>{{ $message }}</strong>
+                                </span>
+                            @enderror
                         </div>  
                         
                         <div class="form-group row">
@@ -45,10 +55,16 @@
                         </div>
 
                         <div class="form-group row">
-                            <label  for="birthday" class="col-md-4 col-form-label text-md-right">生年月日</label>
-                            
+                            <label for="birthday" class="col-md-4 col-form-label text-md-right">{{ __('生年月日') }}</label>
+
                             <div class="col-md-6">
-                                <input type="date" class="form-control" name="birthday" value="{{ old('birthday') }}">
+                                <input id="birthday" type="date" class="form-control @error('birthday') is-invalid @enderror" name="birthday" value="{{ old('birthday') }}" required autocomplete="birthday" autofocus>
+
+                                @error('birthday')
+                                    <span class="invalid-feedback" role="alert">
+                                        <strong>{{ $message }}</strong>
+                                    </span>
+                                @enderror
                             </div>
                         </div>
                         

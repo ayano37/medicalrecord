@@ -59,7 +59,7 @@ class TeamController extends Controller
       }
       
       foreach($users as $user) {
-      if ($team->id == $user->team_id && $user->admin_flag == "0"){
+      if ($team->id == $user->team_id && $user->admin_flag == "1"){
         return view('admin.team.edit', ['team_form' => $team]);
       } else {
         return view('errors.403');
@@ -107,7 +107,7 @@ class TeamController extends Controller
       $team->delete();
       
       foreach($users as $user) {
-      if ($team->id == $user->team_id && $user->admin_flag == "0"){
+      if ($team->id == $user->team_id && $user->admin_flag == "1"){
       return redirect('/team');
       } else {
         return view('errors.403');

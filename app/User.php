@@ -5,6 +5,7 @@ namespace App;
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Auth\Passwords\CanResetPassword;
 use Carbon\Carbon;
 
 class User extends Authenticatable
@@ -56,11 +57,6 @@ class User extends Authenticatable
         return $this->hasMany('App\Temperature');
     }
     
-    // public function temperatureToday()
-    // {
-    //     return $this->temperatures->whereDate('created_at', Carbon::today());
-    // }
-    
     public function weights()
     {
         return $this->hasMany('App\Weight');
@@ -74,6 +70,17 @@ class User extends Authenticatable
     public function Injuries()
     {
         return $this->hasMany('App\Injury');
+    }
+    
+    /**
+    * パスワードリセット通知の送信
+    *
+    * @param  string  $token
+    * @return void
+    */
+    public function sendPasswordResetNotification($token)
+    {
+        $this->notify(new ResetPasswordNotification($token));
     }
 
 }

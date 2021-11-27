@@ -29,6 +29,7 @@
                     @if(!is_null($weight))
                         <div class="weight d-flex">
                             <h4>体重：{{ $weight->weight }}kg</h4>
+                            <a class="btn btn-secondary" href="{{ action('UserController@showWeight',['id'=>$user->id]) }}">体重グラフ</a>
                         </div>
                     @endif
                     @if(!is_null($menstrual_period_s))
