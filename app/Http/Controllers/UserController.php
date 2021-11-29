@@ -32,7 +32,7 @@ class UserController extends Controller
         
         //return view('user.index', ['user' => User::findOrFail($id), 'date'=>$date,'temperature'=>$temperature]);
         //foreach($users as $user) {
-        if ($user->id == $request->id || $login_user->admin_flag == "1") {
+        if (($user->id == $request->id || $login_user->admin_flag == "1") && ($user->team_id == $login_user->team_id)) {
             return view('user.show', ['user' => User::findOrFail($request->id), 'target_date'=>$request->target_date, 'today'=>$today,'temperature'=>$temperature,'weight'=>$weight,'menstrual_period_s'=>$menstrual_period_s,'menstrual_period_f'=>$menstrual_period_f,'injury'=>$injury]);
         } else {
             return view('errors.403');

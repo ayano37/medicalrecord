@@ -4,15 +4,17 @@
 
 @section('content')
     <div class="container">
-        <hr color="#c0c0c0">
-            <div class="row">
-                <div id="contents" class="col-md-12">
-                <h1>体重グラフ</h1>
-        		<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-        		<div class="chart-container" style="position: relative; width: 100%; height: 200px;">
-                	<canvas id="myChart"></canvas>
-                </div>
-        		<script>
+        <div class="row">
+            <div id="contents" class="col-md-12">
+            <h1>体重グラフ</h1>
+            <div class="col-md-5">
+                <a class="btn btn-secondary" href="{{ action('UserController@show', ['id' => $user->id]) }}">Myページに戻る</a>    
+            </div>
+        	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        	<div class="chart-container" style="position: relative; width: 100%; height: 200px;">
+            	<canvas id="myChart"></canvas>
+            </div>
+        	<script>
         		window.onload = function() {
             	
             	//ラベル
@@ -22,8 +24,8 @@
             	var weight_log = @json($weight_log);
             	
             	//グラフを描画
-               var ctx = document.getElementById("myChart");
-               var myChart = new Chart(ctx, {
+                var ctx = document.getElementById("myChart");
+                var myChart = new Chart(ctx, {
             		type: 'line',
             		data : {
             			labels: labels,
@@ -36,6 +38,7 @@
             				},
             			]
             		},
+            		//グラフの設定
             		options: {
             			title: {
             				display: true,
@@ -45,10 +48,9 @@
                 });
             	    
             	};
-                </script>
-                </div>
+            </script>
             </div>
-        <hr color="#c0c0c0">
+        </div>
     </div>
 @endsection    
             
