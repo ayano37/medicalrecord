@@ -24,6 +24,7 @@
                     @if(!is_null($temperature))
                         <div class="temperature d-flex align-items-center">
                             <h4>体温：{{ $temperature->temperature }}℃</h4>
+                            <a class="btn btn-secondary" href="{{ action('UserController@showTemperature',['id'=>$user->id]) }}">体温一覧</a>
                         </div>
                     @endif    
                     @if(!is_null($weight))

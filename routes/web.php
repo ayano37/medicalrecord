@@ -44,4 +44,4 @@ Route::get('/team/{id}', 'TeamController@show')->name('team');
 Route::get('/user/{id}', 'UserController@show')->name('user')->middleware('auth');
 
 Route::get('/weight/{id}', 'UserController@showWeight');
-
+Route::get('/temperature/{id}', 'UserController@showTemperature');

@@ -46,8 +46,6 @@ class UserController extends Controller
         $date = isset($request->target_date) ? new Carbon($request->target_date) : Carbon::today();
         $days = date('t', strtotime($date));
         
-        $max = 80;
-	    $min = 35;
 		//該当月の体重データを取り出す
 		$weights = Weight::whereMonth('target_date', $date)->where('user_id', $user->id)->get();
 		$weight_log = [];
@@ -61,8 +59,25 @@ class UserController extends Controller
 		}
 		
 		//Viewにデータを渡す
-		return view("user.showWeight",[
+		return view('user.showWeight',[
 		"label" => $date_log,
 		'user'=>User::findOrFail($request->id),'weight_log' => $weight_log, 'date_log' =>$date_log]);
+	}
+	
+	public function showTemperature(Request $request)
+	{
+	    $user = User::find($request->id);
+	    $date = isset($request->target_date) ? new Carbon($request->target_date) : Carbon::today();
+	    
+	    $temperatures = Temperature::whereMonth('target_date', $date)->where('user_id', $user->id)->get();
+	    //dd($temperatures);
+	    if (count($temperatures) <= 10) {
+            $headline = $temperatures;
+        } else {
+            $headline = null;
+        }
+        //dd($temperatures);
+	    
+	    return view('user.showTemperature', ['user'=>User::findOrFail($request->id), 'temperatures'=>$temperatures]);
 	}
 }
