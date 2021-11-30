@@ -45,3 +45,5 @@ Route::get('/user/{id}', 'UserController@show')->name('user')->middleware('auth'
 
 Route::get('/weight/{id}', 'UserController@showWeight');
 Route::get('/temperature/{id}', 'UserController@showTemperature');
+Route::get('/injury/{id}', 'UserController@showInjury');
+Route::get('/menstrual_period/{id}', 'UserController@showMenstrualPeriod');

@@ -1,12 +1,12 @@
 @extends('layouts.app')
 
-@section('title', '体温一覧')
+@section('title', 'ケガ情報一覧')
 
 @section('content')
     <div class="container">
         <div class="row">
             <div id="contents" class="col-md-12">
-                <h1>体温一覧</h1>
+                <h1>ケガ情報一覧</h1>
                 <div class="col-md-5 py-2">
                     <a class="btn btn-secondary btn-sm" href="{{ action('UserController@show', ['id' => $user->id]) }}">Myページに戻る</a>    
                 </div>
@@ -15,26 +15,17 @@
                 <table class="table table-dark">
                     <thead>
                         <tr>
-                            <th width="15%">日付</th>
-                            <th width="15%">体温</th>
+                            <th width="10%">日付</th>
+                            <th width="50%">ケガ情報</th>
                         </tr>
                     </thead>
                     <tbody>
-                        @php $i = 0; @endphp
-                        @foreach($temperatures as $temperature)
-                            @if(!($i % 4))
+                        @foreach($injuries as $injury)
                             <tr>
-                            @endif
-                            <th width="12%">{{ $temperature->target_date }}</th>
-                            <td width="12%">{{ $temperature->temperature }}</td>
-                            @if(3 == ($i % 4))
+                                <th>{{ $injury->target_date }}</th>
+                                <td>{{ \Str::limit($injury->injury, 500) }}</td>
                             </tr>
-                            @endif
-                            @php $i++; @endphp
                         @endforeach
-                        @if($i % 4)
-                        </tr>
-                        @endif
                     </tbody>
                 </table>
             </div>

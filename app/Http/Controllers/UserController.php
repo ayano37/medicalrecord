@@ -70,14 +70,32 @@ class UserController extends Controller
 	    $date = isset($request->target_date) ? new Carbon($request->target_date) : Carbon::today();
 	    
 	    $temperatures = Temperature::whereMonth('target_date', $date)->where('user_id', $user->id)->get();
-	    //dd($temperatures);
-	    if (count($temperatures) <= 10) {
-            $headline = $temperatures;
-        } else {
-            $headline = null;
-        }
-        //dd($temperatures);
 	    
 	    return view('user.showTemperature', ['user'=>User::findOrFail($request->id), 'temperatures'=>$temperatures]);
+	}
+	
+	public function showInjury(Request $request)
+	{   
+	    $user = User::find($request->id);
+	    $date = isset($request->target_date) ? new Carbon($request->target_date) : Carbon::today();
+	    
+	    $injuries = Injury::whereMonth('target_date', $date)->where('user_id', $user->id)->get();
+	    
+	    return view('user.showInjury', ['user'=>User::findOrFail($request->id), 'injuries'=>$injuries]);
+	}
+	
+	public function showMenstrualPeriod(Request $request)
+	{
+	    $user = User::find($request->id);
+	    $date = isset($request->target_date) ? new Carbon($request->target_date) : Carbon::today();
+	    $menstrual_periods = MenstrualPeriod::whereMonth('target_date', $date)->where('user_id', $user->id)->get();
+	    
+	   // if($menstrual_periods->menstrual_period_s != null) {
+	   //     $menstrual_periods = MenstrualPeriod::whereMonth('target_date', $date)->where('user_id', $user->id)->get();
+	   // } else {
+	        
+	   // }
+	    
+	    return view('user.showMenstrualPeriod',['user'=>User::findOrFail($request->id), 'menstrual_periods'=>$menstrual_periods]);
 	}
 }

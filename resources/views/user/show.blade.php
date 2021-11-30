@@ -17,20 +17,24 @@
                                 <input type="date" name="target_date" value="{{ $target_date }}">
                             </div>
                             <div class="col-md-2">
-                                <input class="btn btn-secondary" type="submit" value="日付変更">
+                                <input class="btn btn-secondary btn-sm" type="submit" value="日付変更">
                             </div>
                         </div> 
                     </form>
                     @if(!is_null($temperature))
                         <div class="temperature d-flex align-items-center">
                             <h4>体温：{{ $temperature->temperature }}℃</h4>
-                            <a class="btn btn-secondary" href="{{ action('UserController@showTemperature',['id'=>$user->id]) }}">体温一覧</a>
+                            <div class="col-md-2">
+                                <a class="btn btn-secondary btn-sm" href="{{ action('UserController@showTemperature',['id'=>$user->id]) }}">体温一覧</a>
+                            </div>
                         </div>
                     @endif    
                     @if(!is_null($weight))
                         <div class="weight d-flex">
                             <h4>体重：{{ $weight->weight }}kg</h4>
-                            <a class="btn btn-secondary" href="{{ action('UserController@showWeight',['id'=>$user->id]) }}">体重グラフ</a>
+                            <div class="col-md-2">
+                                <a class="btn btn-secondary btn-sm" href="{{ action('UserController@showWeight',['id'=>$user->id]) }}">体重グラフ</a>
+                            </div>    
                         </div>
                     @endif
                     @if(!is_null($menstrual_period_s))
@@ -42,21 +46,27 @@
                         <div class="menstrual_period_e d-flex">
                             <h4>生理終了日：{{ $menstrual_period_f->menstrual_period_f }}</h4>
                         </div>
+                        <div class="col-md-2">
+                            <a class="btn btn-secondary btn-sm" href="{{ action('UserController@showMenstrualPeriod',['id'=>$user->id]) }}">生理日一覧</a>
+                        </div>
                     @endif
                     @if(!is_null($injury))
                         <div class="injury d-flex">
                             <h4>ケガ情報：{{ str_limit($injury->injury,500) }}</h4>
+                            <div class="col-md-3">
+                                <a class="btn btn-secondary btn-sm" href="{{ action('UserController@showInjury',['id'=>$user->id]) }}">ケガ情報一覧</a>
+                            </div>
                         </div>
                     @endif
                     <div class="row">
-                        <div class="col-md-3">
-                            <a class="btn btn-secondary" href="{{ action('Admin\UserController@add',['id'=>$user->id]) }}">本日の登録</a>
+                        <div class="col-md-3 py-4">
+                            <a class="btn btn-secondary btn-sm" href="{{ action('Admin\UserController@add',['id'=>$user->id]) }}">本日の登録</a>
                         </div>
-                        <div class="col-md-2">
-                            <a class="btn btn-secondary" href="{{ action('Admin\UserController@edit', ['id' => $user->id,'target_date' => $target_date]) }}">編集</a>    
+                        <div class="col-md-2 py-4">
+                            <a class="btn btn-secondary btn-sm" href="{{ action('Admin\UserController@edit', ['id' => $user->id,'target_date' => $target_date]) }}">編集</a>    
                         </div>
-                        <div class="col-md-5">
-                            <a class="btn btn-secondary" href="{{ action('TeamController@show', ['id' => $user->team_id]) }}">チームページに戻る</a>    
+                        <div class="col-md-5 py-4">
+                            <a class="btn btn-secondary btn-sm" href="{{ action('TeamController@show', ['id' => $user->team_id]) }}">チームページに戻る</a>    
                         </div>
                     </div>
                 </div>

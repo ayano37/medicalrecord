@@ -7,8 +7,8 @@
         <div class="row">
             <div id="contents" class="col-md-12">
             <h1>体重グラフ</h1>
-            <div class="col-md-5">
-                <a class="btn btn-secondary" href="{{ action('UserController@show', ['id' => $user->id]) }}">Myページに戻る</a>    
+            <div class="col-md-5 py-2">
+                <a class="btn btn-secondary btn-sm" href="{{ action('UserController@show', ['id' => $user->id]) }}">Myページに戻る</a>    
             </div>
         	<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
         	<div class="chart-container" style="position: relative; width: 100%; height: 200px;">
