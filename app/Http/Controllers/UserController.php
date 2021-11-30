@@ -69,9 +69,21 @@ class UserController extends Controller
 	    $user = User::find($request->id);
 	    $date = isset($request->target_date) ? new Carbon($request->target_date) : Carbon::today();
 	    
+	    //該当月の体重データを取り出す
 	    $temperatures = Temperature::whereMonth('target_date', $date)->where('user_id', $user->id)->get();
+		$temperature_log = [];
+		foreach($temperatures as $temperature) {
+		    $temperature_log[] = $temperature->temperature;
+		}
+		//該当つきの日付を取り出す
+		$date_log = [];
+		foreach($temperatures as $target_date) {
+		    $date_log[] = $target_date->target_date;
+		}
 	    
-	    return view('user.showTemperature', ['user'=>User::findOrFail($request->id), 'temperatures'=>$temperatures]);
+	    return view('user.showTemperature', [
+	    "label" => $date_log,
+	    'user'=>User::findOrFail($request->id), 'temperature_log'=>$temperature_log,'date_log'=>$date_log]);
 	}
 	
 	public function showInjury(Request $request)

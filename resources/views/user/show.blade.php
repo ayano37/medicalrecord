@@ -25,7 +25,7 @@
                         <div class="temperature d-flex align-items-center">
                             <h4>体温：{{ $temperature->temperature }}℃</h4>
                             <div class="col-md-2">
-                                <a class="btn btn-secondary btn-sm" href="{{ action('UserController@showTemperature',['id'=>$user->id]) }}">体温一覧</a>
+                                <a class="btn btn-secondary btn-sm" href="{{ action('UserController@showTemperature',['id'=>$user->id]) }}">体温グラフ</a>
                             </div>
                         </div>
                     @endif    
@@ -45,10 +45,10 @@
                     @if(!is_null($menstrual_period_f))
                         <div class="menstrual_period_e d-flex">
                             <h4>生理終了日：{{ $menstrual_period_f->menstrual_period_f }}</h4>
-                        </div>
-                        <div class="col-md-2">
-                            <a class="btn btn-secondary btn-sm" href="{{ action('UserController@showMenstrualPeriod',['id'=>$user->id]) }}">生理日一覧</a>
-                        </div>
+                            <div class="col-md-2">
+                                <a class="btn btn-secondary btn-sm" href="{{ action('UserController@showMenstrualPeriod',['id'=>$user->id]) }}">生理日一覧</a>
+                            </div>
+                        </div>    
                     @endif
                     @if(!is_null($injury))
                         <div class="injury d-flex">
