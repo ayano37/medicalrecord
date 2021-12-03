@@ -29,8 +29,7 @@ class UserController extends Controller
         $menstrual_period_f = \App\MenstrualPeriod::select('menstrual_period_f','updated_at');
         $menstrual_period_f = MenstrualPeriod::whereDate('target_date', $target_date)->where('user_id', $user->id)->first();
         $injury = Injury::whereDate('target_date', $target_date)->where('user_id', $user->id)->first();
-        
-        //return view('user.index', ['user' => User::findOrFail($id), 'date'=>$date,'temperature'=>$temperature]);
+    
         //foreach($users as $user) {
         if (($user->id == $request->id || $login_user->admin_flag == "1") && ($user->team_id == $login_user->team_id)) {
             return view('user.show', ['user' => User::findOrFail($request->id), 'target_date'=>$request->target_date, 'today'=>$today,'temperature'=>$temperature,'weight'=>$weight,'menstrual_period_s'=>$menstrual_period_s,'menstrual_period_f'=>$menstrual_period_f,'injury'=>$injury]);
@@ -100,13 +99,7 @@ class UserController extends Controller
 	{
 	    $user = User::find($request->id);
 	    $date = isset($request->target_date) ? new Carbon($request->target_date) : Carbon::today();
-	    $menstrual_periods = MenstrualPeriod::whereMonth('target_date', $date)->where('user_id', $user->id)->get();
-	    
-	   // if($menstrual_periods->menstrual_period_s != null) {
-	   //     $menstrual_periods = MenstrualPeriod::whereMonth('target_date', $date)->where('user_id', $user->id)->get();
-	   // } else {
-	        
-	   // }
+	    $menstrual_periods = MenstrualPeriod::whereYear('target_date', $date)->where('user_id', $user->id)->get();
 	    
 	    return view('user.showMenstrualPeriod',['user'=>User::findOrFail($request->id), 'menstrual_periods'=>$menstrual_periods]);
 	}

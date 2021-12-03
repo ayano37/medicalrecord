@@ -16,7 +16,6 @@ class UserController extends Controller
 {
   public function add(Request $request)
   {   
-      //dd($request->id);
       $teams = Team::all();
       $user = User::find($request->id);
       $temperature = Temperature::find($request->id);
@@ -44,7 +43,6 @@ class UserController extends Controller
       $temperature->user_id=$user->id;
       $temperature->temperature=$request->temperature;
       $temperature->target_date=$request->target_date;
-      //dd($temperature);
       $temperature->save();
       
       $weight->user_id=$user->id;
@@ -65,22 +63,13 @@ class UserController extends Controller
       
       unset($form['_token']);
   
-      // $id = $user->id;
-      // return redirect('/user/{id}');
       return redirect()->route('user', [$user]);
   }
   
   public function edit(Request $request)
   {   
-      //dd($request->all());
       $user = User::find($request->id);
       $date = isset($request->target_date) ? new Carbon($request->target_date) : Carbon::today();
-      //dd($date);
-      //$target_date = $request->target_date;
-      //$form = $request->all();
-      //dd($form);
-      //$target_date = $request->target_date;
-      //dd($target_date);
       
       $temperature = Temperature::whereDate('target_date', $date)->where('user_id', $user->id)->first();
       $weight = Weight::whereDate('target_date', $date)->where('user_id', $user->id)->first();
@@ -95,35 +84,23 @@ class UserController extends Controller
 
   public function update(Request $request)
   {   
-      //dd($request);
-      // Validationをかける
-      //$this->validate($request, User::$rules);
       // User Modelからデータを取得する
       $user = User::find($request->id);
       $date = $request->target_date;
-      //dd($date);
+      
       $temperature = Temperature::find($request->id);
-      //dd($temperature);
       $weight = Weight::find($request->id);
       $menstrual_period_s = MenstrualPeriod::find($request->id);
       $menstrual_period_f = MenstrualPeriod::find($request->id);
       $injury = Injury::find($request->id);
-      //dd($injury);
-      
-      //dd($date);
       
       // 送信されてきたフォームデータを格納する
       $form = $request->all();
-      //dd($form);
-      //dd($temperature_form);
       
       unset($form['_token']);
 
       // 該当するデータを上書きして保存する
       $temperature->fill($form)->save();
-      //$temperature->target_date = Carbon::parse($request->target_date)->toDateString();
-      //dd($temperature);
-      //
       $weight->fill($form)->save();
       $menstrual_period_s->fill($form)->save();
       $menstrual_period_f->fill($form)->save();
@@ -132,12 +109,4 @@ class UserController extends Controller
       return redirect()->route('user', [$user]);
   }
   
-  // public function delete(Request $request)
-  // {
-  //     // 該当するUser Modelを取得
-  //     $user = User::find($request->id);
-  //     // 削除する
-  //     $user->delete();
-  //     return redirect('/user');
-  // }
 }

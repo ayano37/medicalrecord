@@ -30,20 +30,12 @@ class TeamController extends Controller
           $team->image_path = null;
       }
       
-      // $user = new User();
-      // //$user->name= $form['name'];
-      // if ( !isset($form['name']) || $form['name'] == "" ){
-      // $message = '名前を入力してください';
-      // } 
-      
-      //unset($form['name']);
       unset($form['_token']);
       unset($form['image']);
       // データベースに保存する
       $team->fill($form);
       $team->save();
-      // $user->team_id = $team->id;
-      // $user->save();
+    
       return redirect('/team');
   
   }
@@ -53,7 +45,7 @@ class TeamController extends Controller
       // Team Modelからデータを取得する
       $users = User::all();
       $team = Team::find($request->id);
-      //dd($user);
+     
       if (empty($team)) {
         abort(404);    
       }
@@ -70,7 +62,6 @@ class TeamController extends Controller
 
     public function update(Request $request)
   {   
-      //$this->validate($request, Team::$rules);
       // Team Modelからデータを取得する
       $team = Team::find($request->id);
       // 送信されてきたフォームデータを格納する
@@ -90,10 +81,6 @@ class TeamController extends Controller
 
       // 該当するデータを上書きして保存する
       $team->fill($team_form)->save();
-      
-      // $user = new User();
-      // $user->team_id = $team->id;
-      // $user->save();
       
       return redirect()->route('team', [$team]);
   }

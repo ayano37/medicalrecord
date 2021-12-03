@@ -29,11 +29,6 @@ Route::group(['prefix' => 'admin'], function() {
     Route::post('user/edit', 'Admin\UserController@update');
 });
 
-// Route::get('/register', 'Auth\RegisterController@showRegisterForm');
-// Route::post('/register', 'Auth\RegisterController@register');
-// Route::get('/login', 'Auth\loginController@showLoginForm');
-// Route::post('/login', 'Auth\loginController@login');
-
 Auth::routes();
 
 //Route::get('/top', 'TeamController@add');
