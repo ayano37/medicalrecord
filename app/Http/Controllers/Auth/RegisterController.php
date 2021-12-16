@@ -11,6 +11,7 @@ use Illuminate\Foundation\Auth\RegistersUsers;
 use Auth;
 use Illuminate\Http\Request;
 use Illuminate\Auth\Events\Registered;
+use Illuminate\Support\Facades\Storage;
 
 class RegisterController extends Controller
 {
@@ -81,7 +82,7 @@ class RegisterController extends Controller
       //dd($avatar_image);
         
         
-        $user = User::create([
+        return User::create([
             
             'admin_flag' => $data['admin_flag'],
             'team_id' => $data['team_id'],
@@ -91,7 +92,6 @@ class RegisterController extends Controller
             'password' => Hash::make($data['password']),
             'avatar_image' => $avatar_image
         ]);
-        dd($user);
     }
     
     public function redirectPath()
