@@ -23,7 +23,7 @@ class CreateUsersTable extends Migration
             $table->date('birthday');
             $table->string('avatar_image')->nullable();
             $table->integer('admin_flag');
-            $table->date('target_date');
+            $table->date('target_date')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });
