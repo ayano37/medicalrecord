@@ -73,7 +73,7 @@
                 <div id="sidebar" class="col-sm-4">
                     <div class="image">
                         @if ($user->avatar_image)
-                            <img width="320px" src="{{ asset('storage/image/' . $user->avatar_image) }}">
+                            <img width="320px" src="{{ $user->avatar_image }}">
                         @endif
                     </div>
                     <div class="name mx-auto">

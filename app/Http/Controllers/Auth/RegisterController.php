@@ -72,15 +72,16 @@ class RegisterController extends Controller
         $data = $request->all();
         //dd($request);
         if (isset($data['image'])) {
-        $path = $request->file('image')->store('public/image');    
+        $path = Storage::disk('s3')->putFile('/',$data['image'],'public');    
         //$path = $data['image']->store('public/image');
-        $avatar_image = basename($path);
+        $avatar_image = Storage::disk('s3')->url($path);
       } else {
           $avatar_image = null;
       }
       //dd($avatar_image);
         
-        return User::create([
+        
+        $user = User::create([
             
             'admin_flag' => $data['admin_flag'],
             'team_id' => $data['team_id'],
@@ -90,6 +91,7 @@ class RegisterController extends Controller
             'password' => Hash::make($data['password']),
             'avatar_image' => $avatar_image
         ]);
+        dd($user);
     }
     
     public function redirectPath()

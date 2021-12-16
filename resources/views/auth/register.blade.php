@@ -104,13 +104,6 @@
                             </div>
                         </div>
                         
-                        <!--<div class="form-group row">-->
-                        <!--    <label for ="avatar_image" class="col-md-4 col-form-label text-md-right">画像</label>-->
-                        <!--    <div class="col-md-6">-->
-                        <!--        <input type="file" class="form-control-file" name="image">-->
-                        <!--    </div>-->
-                        <!--</div>-->
-                        
                         <div class="form-group row">
                             <label for="avatar_image" class="col-md-4 col-form-label text-md-right">{{ __('プロフィール画像 (サイズは1024Kbyteまで）') }}</label>
  

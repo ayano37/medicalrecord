@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
 use App\Team;
 use App\User;
+use Storage;
 
 class TeamController extends Controller
 {
@@ -24,8 +25,8 @@ class TeamController extends Controller
 
       // formに画像があれば、保存する
       if (isset($form['image'])) {
-        $path = $request->file('image')->store('public/image');
-        $team->image_path = basename($path);
+        $path = Storage::disk('s3')->putFile('/',$form['image'],'public');
+        $team->image_path = Storage::disk('s3')->url($path);
       } else {
           $team->image_path = null;
       }

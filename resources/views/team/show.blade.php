@@ -14,7 +14,7 @@
                 <div class="col-md-5 mx-auto">
                     <div class="image">
                         @if ($team->image_path)
-                            <img width="320px" src="{{ asset('storage/image/' . $team->image_path) }}">
+                            <img width="320px" src="{{ $team->image_path }}">
                         @endif
                     </div>
                 </div>
