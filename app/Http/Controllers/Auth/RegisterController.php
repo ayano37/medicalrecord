@@ -11,7 +11,7 @@ use Illuminate\Foundation\Auth\RegistersUsers;
 use Auth;
 use Illuminate\Http\Request;
 use Illuminate\Auth\Events\Registered;
-use Illuminate\Support\Facades\Storage;
+use Storage;
 
 class RegisterController extends Controller
 {
@@ -73,7 +73,7 @@ class RegisterController extends Controller
         $data = $request->all();
         //dd($request);
         if (isset($data['image'])) {
-        $path = Storage::disk('s3')->put('/',$data['image'],'public');    
+        $path = Storage::disk('s3')->putFile('/',$data['image'],'public');    
         //$path = $data['image']->store('public/image');
         $avatar_image = Storage::disk('s3')->url($path);
       } else {

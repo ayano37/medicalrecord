@@ -25,7 +25,7 @@ class TeamController extends Controller
 
       // formに画像があれば、保存する
       if (isset($form['image'])) {
-        $path = Storage::disk('s3')->putFile('/',$form['image'],'public');
+        $path = Storage::disk('s3')->putFile('/ex',$form['image'],'public');
         $team->image_path = Storage::disk('s3')->url($path);
       } else {
           $team->image_path = null;
